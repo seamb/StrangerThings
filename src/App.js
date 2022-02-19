@@ -1,38 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import Posts  from './components/posts.js'
+
 
 const apiURL = "https://strangers-things.herokuapp.com/api/2111-CSU-RM-WEB-PT/posts";
 
 function App() {
-const [posts, setPosts] = useState ([])
+const [posts, setData] = useState ([])
 
 useEffect(() => {
+
+  getPosts();
+   }, []);
   
-const apiFetchData = async () => {
-  const response = await fetch (apiURL);
-  console.log(response)
-  const posts = await response.json();
 
-  console.log("DATA POSTs", posts)
-  setPosts(posts);
-
-};
-
-  apiFetchData();
-  }, [])
-  
+   const getPosts = async () => {
+     const strangePosts = await fetch (apiURL);
+     console.log(strangePosts, "STRANGER")
+     const results = await strangePosts.json();
+     console.log(results, "RESULTS")
+     const posts = results.data.posts;
+     console.log(posts, "POSTS")
+     console.log(results.data.posts)
+     setData(posts)
+   }
   return (
+
+  
     <div className="App">
 
       <h1>
         STRANGER THINGS APP !
       </h1>
-          {
-          posts.map((data, index) =>{
-          return <p key="index">{data}</p>
-          }) 
-        } 
-      
+      <Posts posts={posts}/>
+     
+  
     </div>
   );
 }
