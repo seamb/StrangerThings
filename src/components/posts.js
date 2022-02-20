@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 function Posts({posts}) {
     return(
        posts.map((post, index) => {
