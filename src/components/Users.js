@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 const apiURL ="https://strangers-things.herokuapp.com/api/2111-CSU-RM-WEB-PT";
 
-function Users () {
+function Users ({setToken, setUser}) {
     const params = useParams();
+    const history = useHistory();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('')
 
@@ -24,7 +25,12 @@ function Users () {
             })
         })
         const result = await resp.json();
-        console.log('Result', result)    
+        console.log('TOKEN', result.data.token)
+        console.log('resutlts--', result)
+        console.log(username, password)
+        setToken(result.data.token);
+        // setUser()
+        history.push("/");
 
     } 
    
