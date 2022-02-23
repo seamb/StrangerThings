@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 
 const apiURL ="https://strangers-things.herokuapp.com/api/2111-CSU-RM-WEB-PT";
 
-function Posts({posts, setPosts}) {
+const Posts = ({posts, setPosts}) => {
 
   useEffect(() => {
     try{
@@ -15,10 +15,13 @@ function Posts({posts, setPosts}) {
         const posts = results.data.posts;
         console.log(posts, "POSTS")
         console.log(results.data.posts)
-        setPosts(posts)
+          if (posts);
+    setPosts(posts)
+     
 
       }
     getPosts();
+  
 
 
     }

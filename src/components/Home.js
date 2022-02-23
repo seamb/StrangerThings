@@ -1,9 +1,11 @@
 import React from 'react';
 
-function Home () {
+const Home = ({user}) => {
     return(
         <h1>
-            WELCOME HOME!
+            WELCOME HOME! 
+            {/* {user.username} */}
+            {/* .charAt(0).toUpperCase() + user.username.slice(1)  */}
         </h1>
     )
     }
