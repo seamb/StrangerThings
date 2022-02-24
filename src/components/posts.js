@@ -1,12 +1,21 @@
 import React, { useEffect } from 'react';
 
+// import callApi from '../util';
+
+// const Postings = async () =>{
+//   const [posts, setPosts] = useState("")
+  
+//   const postData = await callApi ({
+//     url: `/posts`
+//   })
+// }
+// console.log(postData)
 
 const apiURL ="https://strangers-things.herokuapp.com/api/2111-CSU-RM-WEB-PT";
 
 const Posts = ({posts, setPosts}) => {
 
   useEffect(() => {
-    try{
       const getPosts = async () => {
         const strangePosts = await fetch (`${apiURL}/posts`);
         console.log(strangePosts, "STRANGER")
@@ -15,27 +24,24 @@ const Posts = ({posts, setPosts}) => {
         const posts = results.data.posts;
         console.log(posts, "POSTS")
         console.log(results.data.posts)
-          if (posts);
-    setPosts(posts)
-     
+         
 
-      }
+     if (posts){
+      setPosts(posts)
+    }
+  }
     getPosts();
   
-
-
-    }
-    catch (error){
-    console.log(error)
-    }
-
   }, [])
-  
+
+     console.log("THESE POSTS:", posts)
     return(
-       posts.map((post, index) => {
+   
+     posts && posts.map((post, index) => {
         return (
           <p key={index}>
             <strong>{post.title}</strong> <br/>
+          {/* {  console.log(posts)} */}
             {post.description} <br/>
             {post.price} 
             <br/>

@@ -15,18 +15,18 @@ const AddPosts = ({token, setPosts}) => {
         const postResp = await callApi ({
         url: `/posts`,
         method: "POST",
-        headers: { 
-            'Content-Type': 'application/json',
-        },
+        // headers: { 
+        //     'Content-Type': 'application/json',
+        // },
         token,
         body: {
-            posts:{
-                author:{
+            post:{
+           
                 title,
                 description,
                 price,
                 willDeliver              
-            }}}
+            }}
            
         })
         console.log("Post reponses", postResp)
@@ -34,9 +34,9 @@ const AddPosts = ({token, setPosts}) => {
         const allPosts = await callApi({
         url: '/posts'
         })
-        console.log("ALL NEW POSTS",allPosts);
-        setPosts(allPosts.posts)
-        console.log(setPosts)
+        console.log("ALL NEW POSTS",allPosts.data.posts);
+        setPosts(allPosts.data.posts)
+        // console.log(setPosts)
     
 
     }

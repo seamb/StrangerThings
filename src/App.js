@@ -45,7 +45,7 @@ const [user, setUser] = useState ('');
      <AddPosts posts={posts} setPosts={setPosts} user={user} token={token}/>
    </Route>
     <Route exact path="/users/:method">
-     <Users setToken={setToken} setUser={setUser} user={user} />
+     <Users setToken={setToken} setUser={setUser} />
    </Route>
  
     </>
