@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Link } from 'react-router-dom' ;
 import './App.css';
 import Posts from './components/Posts'
@@ -6,12 +6,30 @@ import Home from './components/Home'
 import Users from './components/Users'
 import AddPosts from './components/AddPosts';
 
-// const apiURL = "https://strangers-things.herokuapp.com/api/2111-CSU-RM-WEB-PT/posts";
+const apiURL = "https://strangers-things.herokuapp.com/api/2111-CSU-RM-WEB-PT";
 
 const App = () => {
 const [posts, setPosts] = useState ([]);
 const [token, setToken] = useState ('');
 const [user, setUser] = useState ('');
+
+  useEffect(() => {
+    try{
+      const getPosts = async () => {
+        const strangeResp = await fetch (`${apiURL}/posts`);
+        const results = await strangeResp.json();
+        const posts = results.data.posts;
+
+      
+        
+      if (posts)
+       setPosts(posts);
+      }
+      getPosts();
+      } catch (error) {
+        console.log(error)
+      }
+  }, []);
 
   return (
     <>
@@ -41,7 +59,7 @@ const [user, setUser] = useState ('');
      <Home user={user} token={token}/>
    </Route>
    <Route path="/posts">
-     <Posts posts={posts} setPosts={setPosts}/>
+     <Posts posts={posts} setPosts={setPosts} token={token}/>
      <AddPosts posts={posts} setPosts={setPosts} user={user} token={token}/>
    </Route>
     <Route exact path="/users/:method">

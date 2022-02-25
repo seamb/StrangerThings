@@ -15,9 +15,6 @@ const AddPosts = ({token, setPosts}) => {
         const postResp = await callApi ({
         url: `/posts`,
         method: "POST",
-        // headers: { 
-        //     'Content-Type': 'application/json',
-        // },
         token,
         body: {
             post:{
@@ -36,8 +33,6 @@ const AddPosts = ({token, setPosts}) => {
         })
         console.log("ALL NEW POSTS",allPosts.data.posts);
         setPosts(allPosts.data.posts)
-        // console.log(setPosts)
-    
 
     }
     return(

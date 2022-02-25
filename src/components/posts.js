@@ -1,54 +1,46 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import callApi from '../util';
+import {IndPost} from './IndPost.js'
 
-// import callApi from '../util';
 
-// const Postings = async () =>{
-//   const [posts, setPosts] = useState("")
-  
-//   const postData = await callApi ({
-//     url: `/posts`
-//   })
-// }
-// console.log(postData)
 
-const apiURL ="https://strangers-things.herokuapp.com/api/2111-CSU-RM-WEB-PT";
+const Posts = ({posts, setPosts, token}) => {
 
-const Posts = ({posts, setPosts}) => {
+  const handleDelete = async(POST_ID) =>{
+    const resp = await callApi({
+      url: `/posts/${POST_ID}`,
+      method: 'DELETE',
+      token,
+      
+    })
+    console.log(resp, "RESPPP");
+    
+    const postList = await callApi ({
+      url: `/posts`,
+      token,
+    })
 
-  useEffect(() => {
-      const getPosts = async () => {
-        const strangePosts = await fetch (`${apiURL}/posts`);
-        console.log(strangePosts, "STRANGER")
-        const results = await strangePosts.json();
-        console.log(results, "RESULTS")
-        const posts = results.data.posts;
-        console.log(posts, "POSTS")
-        console.log(results.data.posts)
-         
-
-     if (posts){
-      setPosts(posts)
-    }
+    console.log(postList, 'PL');
+    const postsLeft = postList.data.posts;
+    if(postsLeft)
+    setPosts(postsLeft)
   }
-    getPosts();
-  
-  }, [])
 
-     console.log("THESE POSTS:", posts)
-    return(
-   
-     posts && posts.map((post, index) => {
-        return (
-          <p key={index}>
-            <strong>{post.title}</strong> <br/>
-          {/* {  console.log(posts)} */}
-            {post.description} <br/>
-            {post.price} 
-            <br/>
-           location: <em>{post.location}</em>
-          </p>
-          )
-      }));
+ 
+  return <>
+    {
+      posts.map(post=> <IndPost key={post._id} post={post} token={token}>
+        {token && post.author.username
+        ? <button onClick={() => handleDelete(post._id)}>DELETE POST</button>
+        : null}
+        </IndPost>)
+     
     }
+  </>
+  
 
+}
 export default Posts;
+      
+
+
