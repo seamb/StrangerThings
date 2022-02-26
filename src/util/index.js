@@ -16,7 +16,6 @@ const callApi = async ({url, method, token, body}) => {
     console.log('request url: ', REACT_APP_BASE_URL + url)
     const response = await fetch(REACT_APP_BASE_URL + url, options);
     const data = await response.json();
-    //   console.log(body.user.username, "Body User Data")
     console.log('data: ', data.data);
     if(data.error) throw data.error;
     return data;

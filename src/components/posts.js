@@ -30,7 +30,7 @@ const Posts = ({posts, setPosts, token}) => {
   return <>
     {
       posts.map(post=> <IndPost key={post._id} post={post} token={token}>
-        {token && post.isAuthor
+        {token 
         ? <button onClick={() => handleDelete(post._id)}>DELETE POST</button>
         : null}
         </IndPost>)

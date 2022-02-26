@@ -5,6 +5,7 @@ import Posts from './components/Posts'
 import Home from './components/Home'
 import Users from './components/Users'
 import AddPosts from './components/AddPosts';
+import PostDetails from './components/PostDetails'
 
 const apiURL = "https://strangers-things.herokuapp.com/api/2111-CSU-RM-WEB-PT";
 
@@ -58,11 +59,14 @@ const [user, setUser] = useState ('');
    <Route exact path="/">
      <Home user={user} token={token}/>
    </Route>
-   <Route path="/posts">
+   <Route exact path="/posts">
      <Posts posts={posts} setPosts={setPosts} token={token}/>
      <AddPosts posts={posts} setPosts={setPosts} user={user} token={token}/>
    </Route>
-    <Route exact path="/users/:method">
+   <Route exact path="/posts/:POST_ID">
+     <PostDetails posts={posts} token={token} />
+   </Route>
+   <Route exact path="/users/:method">
      <Users setToken={setToken} setUser={setUser} />
    </Route>
  
