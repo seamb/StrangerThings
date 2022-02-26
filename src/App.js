@@ -19,7 +19,8 @@ const fetchPosts = async () => {
   url: `/posts`,
   token,
 
-}) 
+  }) 
+console.log("RESP__", resp)
 const posts = resp.data.posts;
   if (posts)
   setPosts(posts);
@@ -29,6 +30,8 @@ const posts = resp.data.posts;
     try{
        
    fetchPosts();
+
+
 
       } catch (error) {
         console.log(error)
@@ -66,10 +69,10 @@ const posts = resp.data.posts;
      <Home user={user} token={token}/>
    </Route>
    <Route exact path="/posts">
-     <Posts posts={posts} setPosts={setPosts} token={token} user={user}/>
+     <Posts posts={posts} setPosts={setPosts} token={token} user={user} fetchPosts={fetchPosts}/>
      <AddPosts posts={posts} setPosts={setPosts} user={user} token={token}/>
    </Route>
-   <Route exact path="/posts/:POST_ID">
+   <Route exact path="/posts/POST_ID">
      <PostDetails posts={posts} token={token} />
    </Route>
    <Route exact path="/users/:method">

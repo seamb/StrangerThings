@@ -1,8 +1,10 @@
+
+   
 import React, { useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import callApi from '../util';
 
-function Users ({setToken, setUser, user}) {
+function Users ({setToken, setUser }) {
     const params = useParams();
     const history = useHistory();
     const [username, setUsername] = useState('');
@@ -23,11 +25,7 @@ function Users ({setToken, setUser, user}) {
         }
     })  
         console.log(userResp.data)
-        console.log(userResp.url, "users name")
-        // if(userResp.data){
-        // console.log('TOKEN', userResp.data.token)
-        // console.log(username, password, username)
-       
+
     if (userResp.data) {
       console.log('token in account', userResp.data.token);
       // call /users/me
@@ -40,12 +38,11 @@ function Users ({setToken, setUser, user}) {
         setToken(userResp.data.token);
         console.log("my name is", userData.data.username);
         setUser({username: userData.data.username})
-        if(userResp.data.token || " "){
+        if(userResp.data.token || null ){
         history.push("/home");
 
         }}
     } 
-   
 
     return( <>
         <h1>

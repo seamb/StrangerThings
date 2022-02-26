@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import callApi from '../util';
 import {IndPost} from './IndPost.js'
 
 
 
-const Posts = ({posts, setPosts, token ,}) => {
+const Posts = ({posts, setPosts, token, user, fetchPosts  }) => {
 
   const handleDelete = async (POST_ID) =>{
     const resp = await callApi({
@@ -25,11 +25,13 @@ const Posts = ({posts, setPosts, token ,}) => {
     if(postsLeft)
     setPosts(postsLeft)
   }
-
+  useEffect(() => {
+    fetchPosts()
+  }, []);
  
   return <>
     {
-      posts.map(post => <IndPost key={post._id} post={post} >
+      posts.map(post => <IndPost key={post._id} post={post} token={token} user={user}>
         {token 
         && post.isAuthor
         ? <button onClick={() => handleDelete(post._id)}>DELETE POST</button>
