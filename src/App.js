@@ -6,27 +6,30 @@ import Home from './components/Home'
 import Users from './components/Users'
 import AddPosts from './components/AddPosts';
 import PostDetails from './components/PostDetails'
+import callApi from './util';
 
-const apiURL = "https://strangers-things.herokuapp.com/api/2111-CSU-RM-WEB-PT";
 
 const App = () => {
 const [posts, setPosts] = useState ([]);
 const [token, setToken] = useState ('');
 const [user, setUser] = useState ('');
 
+const fetchPosts = async () => {
+  const resp = await callApi ({
+  url: `/posts`,
+  token,
+
+}) 
+const posts = resp.data.posts;
+  if (posts)
+  setPosts(posts);
+      }
+
   useEffect(() => {
     try{
-      const getPosts = async () => {
-        const strangeResp = await fetch (`${apiURL}/posts`);
-        const results = await strangeResp.json();
-        const posts = results.data.posts;
+       
+   fetchPosts();
 
-      
-        
-      if (posts)
-       setPosts(posts);
-      }
-      getPosts();
       } catch (error) {
         console.log(error)
       }
@@ -43,7 +46,10 @@ const [user, setUser] = useState ('');
               <Link to="/posts">Posts</Link>
             </li>
             <li>
-              <Link to="/users/:method">Sign up / Sign in</Link>
+              <Link to="/users/login">Log in</Link>       
+            </li>
+            <li>
+              <Link to="/users/register">Sign up</Link>
             </li>
           </ul>
         </nav>
@@ -56,11 +62,11 @@ const [user, setUser] = useState ('');
       
     </div>
   
-   <Route exact path="/">
+   <Route exact path="/home">
      <Home user={user} token={token}/>
    </Route>
    <Route exact path="/posts">
-     <Posts posts={posts} setPosts={setPosts} token={token}/>
+     <Posts posts={posts} setPosts={setPosts} token={token} user={user}/>
      <AddPosts posts={posts} setPosts={setPosts} user={user} token={token}/>
    </Route>
    <Route exact path="/posts/:POST_ID">

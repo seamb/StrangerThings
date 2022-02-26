@@ -4,23 +4,23 @@ import {IndPost} from './IndPost.js'
 
 
 
-const Posts = ({posts, setPosts, token}) => {
+const Posts = ({posts, setPosts, token ,}) => {
 
-  const handleDelete = async(POST_ID) =>{
+  const handleDelete = async (POST_ID) =>{
     const resp = await callApi({
       url: `/posts/${POST_ID}`,
       method: 'DELETE',
       token,
       
     })
-    console.log(resp, "RESPPP");
+    console.log(resp, "RESPOPNSE ON Posts");
     
     const postList = await callApi ({
       url: `/posts`,
       token,
     })
 
-    console.log(postList, 'PL');
+    console.log(postList, 'Post List');
     const postsLeft = postList.data.posts;
     if(postsLeft)
     setPosts(postsLeft)
@@ -29,17 +29,21 @@ const Posts = ({posts, setPosts, token}) => {
  
   return <>
     {
-      posts.map(post=> <IndPost key={post._id} post={post} token={token}>
+      posts.map(post => <IndPost key={post._id} post={post} >
         {token 
+        && post.isAuthor
         ? <button onClick={() => handleDelete(post._id)}>DELETE POST</button>
         : null}
+
+      
+
         </IndPost>)
      
     }
   </>
   
-
 }
+
 export default Posts;
       
 

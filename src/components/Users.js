@@ -40,8 +40,8 @@ function Users ({setToken, setUser, user}) {
         setToken(userResp.data.token);
         console.log("my name is", userData.data.username);
         setUser({username: userData.data.username})
-        if(userResp.data.token){
-        history.push("/");
+        if(userResp.data.token || " "){
+        history.push("/home");
 
         }}
     } 
