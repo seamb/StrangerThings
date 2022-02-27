@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const IndPost = ({post, token, children}) => {
 // console.log(post._id, "ID POST");

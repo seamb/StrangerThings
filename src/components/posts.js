@@ -17,7 +17,7 @@ console.log(postOb, "Just POSTS");
       method: 'DELETE',
       token,
     })
-    
+      console.log(resp,"RESP in POSTS");
     const postList = await callApi ({
       url: `/posts`,
       token,
@@ -26,9 +26,8 @@ console.log(postOb, "Just POSTS");
     const postsLeft = postList.data.posts;
     if(postsLeft)
     setPosts(postsLeft)
-    console.log(postsLeft, 'LEFT');
   }
-  
+
   
   useEffect(() => {
     fetchPosts()

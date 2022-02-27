@@ -6,6 +6,7 @@ import Home from './components/Home'
 import Users from './components/Users'
 import AddPosts from './components/AddPosts';
 import PostDetails from './components/PostDetails'
+import Messenger from './components/Messenger';
 import callApi from './util';
 
 
