@@ -5,7 +5,7 @@ const IndPost = ({post, token, children}) => {
 // console.log(post._id, "ID POST");
 // console.log(post.isAuthor, "is author of post");
 // console.log(post.author.username, "is authors username");
-console.log(post, 'POST IN IND');
+// console.log(post, 'POST IN IND');
     return post 
     
     ? <div>

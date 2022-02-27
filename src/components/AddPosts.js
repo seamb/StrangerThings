@@ -11,6 +11,11 @@ const AddPosts = ({token, setPosts}) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setTitle("");
+        setDescription("");
+        setPrice("");
+        setLocation("");
+        setWillDeliver("")
 
         const postResp = await callApi ({
         url: `/posts`,
