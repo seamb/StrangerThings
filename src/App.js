@@ -9,10 +9,12 @@ import PostDetails from './components/PostDetails'
 import callApi from './util';
 
 
+
 const App = () => {
 const [posts, setPosts] = useState ([]);
 const [token, setToken] = useState ('');
 const [user, setUser] = useState ('');
+
 
 const fetchPosts = async () => {
   const resp = await callApi ({
@@ -32,11 +34,12 @@ const posts = resp.data.posts;
    fetchPosts();
 
 
-
       } catch (error) {
         console.log(error)
       }
   }, []);
+
+
 
   return (
     <>
@@ -72,7 +75,7 @@ const posts = resp.data.posts;
      <Posts posts={posts} setPosts={setPosts} token={token} user={user} fetchPosts={fetchPosts}/>
      <AddPosts posts={posts} setPosts={setPosts} user={user} token={token}/>
    </Route>
-   <Route exact path="/posts/POST_ID">
+   <Route path="/posts/:postId">
      <PostDetails posts={posts} token={token} />
    </Route>
    <Route exact path="/users/:method">

@@ -28,7 +28,7 @@ function Users ({setToken, setUser }) {
 
     if (userResp.data) {
       console.log('token in account', userResp.data.token);
-      // call /users/me
+
       const userData = await callApi({ 
         url: '/users/me', 
         token: userResp.data.token,

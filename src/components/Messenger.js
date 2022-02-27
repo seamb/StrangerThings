@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import callApi from "../util";
 
 export const Messenger = ({post, token}) =>{
-    const [content, setContent] = useState('')
-    console.log(post);
+    const [content, setContent] = useState('');
+    console.log(post,token);
     const handleSubmit = async(event) => {
         event.preventDefault();
     
@@ -11,14 +11,14 @@ export const Messenger = ({post, token}) =>{
         url: `posts/${post._id}/messages`,
         method: "POST",
         token,
-        body:{
-            messages:{
-                content,
+        body: {
+            messages: {
+                content: {content : content }}
             }
-        } 
-    })
+        })
     console.log(resp,"RESPONSE")
     }
+
 return(
     <>
     <form onSubmit={handleSubmit}>
