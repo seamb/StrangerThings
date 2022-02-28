@@ -7,10 +7,8 @@ import { useLocation, useHistory } from 'react-router-dom';
 
 
 const Posts = ({ posts, setPosts, token, user, fetchPosts }) => {
-
-  // console.log(posts, "POSTS IN POSTS");
   const [postOb] = posts
-  // console.log(postOb, "Just POSTS"); 
+  console.log(postOb, "Just POSTS"); 
   const { search } = useLocation();
   const history = useHistory();
   console.log('Search location POSTS', search);
@@ -18,7 +16,6 @@ const Posts = ({ posts, setPosts, token, user, fetchPosts }) => {
   const searchTerm = searchParams.get('searchTerm') || '';
 
   console.log("SEARCH TERM", searchTerm);
-  // console.log(object);
 
 
     const handleDelete = async (POST_ID) =>{
@@ -42,8 +39,7 @@ const Posts = ({ posts, setPosts, token, user, fetchPosts }) => {
     useEffect(() => {
       fetchPosts()
     }, []);
-    //if search term is True it will pass through Filetered
-  
+
   const searchResults = (post, searchTerm) => {
  
     const { title, description, price, location, author: {username} } = post;
@@ -63,13 +59,14 @@ const Posts = ({ posts, setPosts, token, user, fetchPosts }) => {
     
 
     return <>
-      <h4>Search</h4>
+      <div className='search'>Search</div>
         <input 
         type="text"
         placeholder="looking for"
         onChange={(e) => { history.push(e.target.value?`/posts?searchTerm=${e.target.value}`: '/posts')}}
         />
         <br/>
+        <div className='posts'>
       {
         filteredPosts.map(post => <IndPost key={post._id} post={post} token={token} user={user}>
           <Link to={`/posts/${post._id}`}>See details</Link>
@@ -78,7 +75,7 @@ const Posts = ({ posts, setPosts, token, user, fetchPosts }) => {
           ? <button onClick={() => handleDelete(post._id)}>DELETE POST</button>
           : null}
           </IndPost>)   
-      }
+      }</div>
     </>
     
 }

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import callApi from '../util';
+import { Link } from 'react-router-dom';
+
 
 
 const AddPosts = ({token, setPosts}) => {
@@ -42,10 +44,12 @@ const AddPosts = ({token, setPosts}) => {
     }
     return(
     <>
+    <div className='addpost'>
         <h1>
             Add a new Post
         </h1>
-            <form onSubmit={handleSubmit}>
+        {token  
+        ?<form onSubmit={handleSubmit}>
             <input type='text'
             placeholder='Title'
             value={title}
@@ -73,6 +77,8 @@ const AddPosts = ({token, setPosts}) => {
             ></input> <br/>
             <button type='Submit'>Submit</button>
         </form>
+        :<Link to="/users/login">Log In To Add a Post</Link>}
+    </div>    
     </>    
     )
     }

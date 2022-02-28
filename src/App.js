@@ -11,10 +11,13 @@ import callApi from './util';
 
 
 
+
 const App = () => {
 const [posts, setPosts] = useState ([]);
 const [token, setToken] = useState ('');
 const [user, setUser] = useState ('');
+const [usersMessages, setUsersMessages] = useState ([]);
+const [usersPosts, setUsersPosts] = useState ('');
 
 
 const fetchPosts = async () => {
@@ -44,10 +47,10 @@ const posts = resp.data.posts;
 
   return (
     <>
-    <nav>
+    <nav className='nav'>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/home">Home</Link>
             </li>
             <li>
               <Link to="/posts">Posts</Link>
@@ -64,13 +67,13 @@ const posts = resp.data.posts;
 
     <div className="App">
       <h1>
-        STRANGER THINGS APP !
+        STRANGER THINGS MARKETPLACE
       </h1>
       
     </div>
   
    <Route exact path="/home">
-     <Home user={user} token={token}/>
+     <Home user={user} token={token} posts={posts} />
    </Route>
    <Route exact path="/posts">
      <Posts posts={posts} setPosts={setPosts} token={token} user={user} fetchPosts={fetchPosts}/>

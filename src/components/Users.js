@@ -1,14 +1,17 @@
 
    
 import React, { useState } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 import callApi from '../util';
+import { Link } from 'react-router-dom';
 
-function Users ({setToken, setUser }) {
+function Users ({ setToken, setUser }) {
     const params = useParams();
     const history = useHistory();
+    // const location = useLocation();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('')
+    
 
     console.log('params', params)
     const handleSubmit = async (event) => {
@@ -34,20 +37,25 @@ function Users ({setToken, setUser }) {
         token: userResp.data.token,
       })
        console.log('User Data', userData);
-       
+       console.log(userData.data.messages, "USER MESS");
+       console.log(userData.data.posts, "USER POSTs");
         setToken(userResp.data.token);
         console.log("my name is", userData.data.username);
         setUser({username: userData.data.username})
         if(userResp.data.token || null ){
         history.push("/home");
-
-        }}
+        }
+    }
     } 
 
-    return( <>
-        <h1>
+         
+            
+console.log(username);
+    return( 
+    <div className='login'>
+        <h3>
             Please {params.method} to continue.
-        </h1>
+        </h3>
         <form onSubmit={handleSubmit}>
             <input type='text'
             placeholder='username'
@@ -59,10 +67,11 @@ function Users ({setToken, setUser }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             ></input><br/>
-            <button type='Submit'>Submit</button>
+            <button className='userbutton' type='Submit'>Submit</button>
         </form>
-    </>
-    )
+        <Link to="/users/register">Click here to Sign Up</Link>
+    </div>
+    ) 
     }
 
 export default Users;

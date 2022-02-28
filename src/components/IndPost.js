@@ -1,16 +1,12 @@
 import React from "react";
-// import { Link } from "react-router-dom";
 
-const IndPost = ({post, token, children}) => {
-// console.log(post._id, "ID POST");
-// console.log(post.isAuthor, "is author of post");
-// console.log(post.author.username, "is authors username");
-// console.log(post, 'POST IN IND');
+
+const IndPost = ({post, children}) => {
     return post 
     
     ? <div>
          
-        <p>
+        <p className='post'>
             <strong>{post.title}</strong> 
             <br/>
              {post.description}
@@ -18,9 +14,10 @@ const IndPost = ({post, token, children}) => {
              {post.price} 
              <br/>
              <em>{post.location}</em>
+             <br/>
+             {post.willDeliver}
         </p>
         {children}
-        {/* <Link to={`/posts/${post._id}`}>See details</Link> */}
     </div>    
    :null 
    
